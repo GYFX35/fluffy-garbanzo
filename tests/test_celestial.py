@@ -1,7 +1,7 @@
 import pytest
 from astropy.time import Time, TimeDelta
-from astropy.coordinates import EarthLocation, SkyCoord
-from astronomy_software.celestial import track_object
+from astropy.coordinates import EarthLocation
+from src.astronomy_software.celestial import track_object
 
 def test_track_object():
     """
@@ -12,7 +12,9 @@ def test_track_object():
     step_size = TimeDelta(3600, format='sec')
     location = EarthLocation(lat='34.0522', lon='-118.2437', height=0)
 
-    positions = track_object('sun', start_time, end_time, step_size, location)
+    positions, optimal_times, anomalies = track_object('sun', start_time, end_time, step_size, location)
 
     assert isinstance(positions, list)
-    assert all(isinstance(p, SkyCoord) for p in positions)
+    assert isinstance(optimal_times, list)
+    assert isinstance(anomalies, list)
+    assert len(positions) > 0
