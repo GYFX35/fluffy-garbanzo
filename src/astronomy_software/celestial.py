@@ -29,6 +29,8 @@ class CelestialObject:
         """
         return get_body(self.name, time, location)
 
+from .agent import AIAgent
+
 def track_object(object_name, start_time, end_time, step_size, location):
     """
     Tracks the movement of a celestial object over a given time range.
@@ -41,9 +43,14 @@ def track_object(object_name, start_time, end_time, step_size, location):
         location (astropy.coordinates.EarthLocation): The location of the observer.
 
     Returns:
-        list: A list of the celestial object's positions at each time step.
+        tuple: A tuple containing the list of positions, optimal observation times, and detected anomalies.
     """
     celestial_object = CelestialObject(object_name)
     times = start_time + np.arange(0, (end_time - start_time).sec, step_size.sec) * step_size
     positions = [celestial_object.get_position(t, location) for t in times]
-    return positions
+
+    agent = AIAgent()
+    optimal_times = agent.identify_optimal_observation_times(positions, location)
+    anomalies = agent.detect_anomalies(positions)
+
+    return positions, optimal_times, anomalies
