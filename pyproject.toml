@@ -17,6 +17,7 @@ dependencies = [
     "numpy",
     "astropy",
     "matplotlib",
+    "flask",
 ]
 
 [project.optional-dependencies]
