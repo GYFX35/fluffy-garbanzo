@@ -17,5 +17,13 @@
     </ul>
     <h2>Next Steps</h2>
     <p>In the next lesson, we'll cover how to start the car and how to use the gear selector.</p>
+
+    {% if apod_data %}
+    <h2>Astronomy Picture of the Day</h2>
+    <h3>{{ apod_data.title }}</h3>
+    <p>{{ apod_data.date }}</p>
+    <img src="{{ apod_data.url }}" alt="{{ apod_data.title }}" width="500">
+    <p>{{ apod_data.explanation }}</p>
+    {% endif %}
 </body>
 </html>
