@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 import os
 from .nasa_api import get_apod
+from .sponsorship import get_open_collective_info
 import argparse
 
 app = Flask(__name__, template_folder=os.path.abspath('src/astronomy_software/driving_school'))
@@ -8,7 +9,8 @@ app = Flask(__name__, template_folder=os.path.abspath('src/astronomy_software/dr
 @app.route('/')
 def index():
     apod_data = get_apod()
-    return render_template('index.html', apod_data=apod_data)
+    sponsorship_info = get_open_collective_info("astronomy-software")
+    return render_template('index.html', apod_data=apod_data, sponsorship_info=sponsorship_info)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

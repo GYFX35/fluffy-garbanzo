@@ -25,5 +25,20 @@
     <img src="{{ apod_data.url }}" alt="{{ apod_data.title }}" width="500">
     <p>{{ apod_data.explanation }}</p>
     {% endif %}
+
+    <hr>
+    <h2>Support the Project</h2>
+    <p>If you like this project, please consider sponsoring us!</p>
+    <ul>
+        <li><a href="https://opencollective.com/astronomy-software">Open Collective</a></li>
+        <li><a href="https://www.patreon.com/astronomy_software">Patreon</a></li>
+    </ul>
+
+    {% if sponsorship_info %}
+    <h3>Current Sponsorship Stats</h3>
+    <p>Collective: {{ sponsorship_info.name }}</p>
+    <p>Description: {{ sponsorship_info.description }}</p>
+    <p>Backers: {{ sponsorship_info.stats.backers.all }}</p>
+    {% endif %}
 </body>
 </html>
